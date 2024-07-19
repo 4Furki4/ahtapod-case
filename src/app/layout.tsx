@@ -3,6 +3,11 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";
 import { ClerkProvider } from "@clerk/nextjs";
+import { ThemeProvider } from "@/providers/ThemeProvider";
+import Navbar from "@/components/Navbar";
+import clsx from "clsx";
+import { auth } from "@clerk/nextjs/server";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,12 +21,25 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { userId }: { userId: string | null } = auth();
+  const isSignedIn = !!userId;
   return (
     <ClerkProvider>
-      <html lang="en">
-        <body className={inter.className}>
+      <html suppressHydrationWarning lang="en">
+        <body className={clsx(inter.className, "min-h-screen bg-background")}>
           <ReactQueryProvider>
-            {children}
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <div className="relative flex min-h-screen flex-col bg-background">
+                <Navbar isSignedIn={isSignedIn} />
+                {children}
+                <Toaster richColors />
+              </div>
+            </ThemeProvider>
           </ReactQueryProvider>
         </body>
       </html>

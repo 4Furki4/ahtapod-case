@@ -1,16 +1,9 @@
-import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import Home from "@/_pages/Home/Home";
 
-
-export default function Home() {
+export default function HomePage() {
   return (
-    <main>
-
-      <SignedOut>
-        <SignInButton />
-      </SignedOut>
-      <SignedIn>
-        <UserButton />
-      </SignedIn>
+    <main className='p-4 space-y-4'>
+      <Home />
     </main>
   );
 }
