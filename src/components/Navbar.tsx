@@ -12,21 +12,22 @@ export default function Navbar({
         <header className='sticky top-0 z-50 w-full border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b-2 p-2'>
             <nav className='max-w-6xl mx-auto'>
                 <ul className='flex gap-4 items-center justify-center'>
-                    <li className='ml-auto'>
+                    <li>
                         <Link href={'/'}>
                             <Button variant={'link'}>
                                 Home
                             </Button>
                         </Link>
                     </li>
-                    <li>
-                        <Link href={'/dashboard'}>
-                            <Button variant={'link'}>
-                                Dashboard
-                            </Button>
-                        </Link>
-                    </li>
-
+                    {isSignedIn ? (
+                        <li className='ml-auto'>
+                            <Link href={'/dashboard'}>
+                                <Button variant={'link'}>
+                                    Dashboard
+                                </Button>
+                            </Link>
+                        </li>
+                    ) : null}
                     <li className='ml-auto'>
                         <ModeToggle />
                     </li>

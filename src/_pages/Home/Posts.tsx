@@ -74,9 +74,7 @@ export default function Posts({ pageNumber }: { pageNumber: number }) {
                     </CardFooter>
                 </Card>
             ))}
-            <Pagination lastPage={
-                data.totalPages
-            } currentPage={page}>
+            <Pagination lastPage={data.totalPages} currentPage={page}>
                 <PaginationContent>
                     <PaginationItem>
                         <PaginationPrevious onClick={
