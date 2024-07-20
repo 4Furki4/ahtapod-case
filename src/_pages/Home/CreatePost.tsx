@@ -21,7 +21,9 @@ import { AxiosError } from 'axios';
 import { Loader2 } from 'lucide-react';
 import { api } from '@/lib/api';
 
-export default function CreatePost() {
+export default function CreatePost({ pageNumber }: {
+    pageNumber: number
+}) {
     const { getToken } = useAuth()
     const queryClient = useQueryClient()
     const form = useForm<z.infer<typeof AddPostSchema>>({
@@ -36,10 +38,15 @@ export default function CreatePost() {
                 }
             })
         },
-        onSuccess: async (newPost, variables) => {
+        onSuccess: async (newPost) => {
             toast.success('Post created successfully')
-            console.log(newPost)
-            queryClient.setQueryData(['posts'], (old: any) => [newPost.data, ...old])
+            queryClient.setQueryData(['posts', pageNumber], (old: any) => {
+                console.log('old', old)
+                return {
+                    ...old,
+                    posts: [newPost.data, ...old.posts]
+                }
+            })
         },
         onError: (error: AxiosError) => {
             if (error.response?.status === 401) {

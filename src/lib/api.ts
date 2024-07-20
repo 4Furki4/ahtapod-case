@@ -4,5 +4,5 @@ export const api = axios.create({
 });
 
 export async function getPosts(page: number = 1, limit: number = 10) {
-    return (await api.get(`/api/posts?page=${page}&limit=${limit}`)).data
+    return (await api.get(`/api/posts?page=${page}&limit=${limit}`)).data as GetPostsResponse
 }
