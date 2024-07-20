@@ -14,6 +14,7 @@ import {
     Pagination,
     PaginationContent,
     PaginationItem,
+    PaginationLink,
     PaginationNext,
     PaginationPrevious,
 } from "@/components/ui/pagination"
@@ -41,13 +42,14 @@ export default function Posts({ pageNumber }: { pageNumber: number }) {
         staleTime: 1000 * 60 * 5,
         placeholderData: keepPreviousData,
     })
-    if (isPending) {
-        return <p>Loading...</p>
-    }
     if (isError) {
-        return <p>Error: {error.message}</p>
+        return (
+            <div className='text-center'>
+                <p className='text-destructive'>{error.message ?? 'Unexpected error'}</p>
+            </div>
+        )
     }
-    if (isFetching || isPlaceholderData) {
+    if (isFetching || isPlaceholderData || isPending) {
         return (
             <SkeletonCards />
         )
@@ -84,9 +86,23 @@ export default function Posts({ pageNumber }: { pageNumber: number }) {
                             }
                         } />
                     </PaginationItem>
+                    {
+                        Array.from({ length: data.totalPages }, (_, i) => i + 1).map((item) => (
+                            <PaginationItem key={item}>
+                                <PaginationLink
+                                    onClick={() => {
+                                        setPage(item)
+                                        router.push(pathname + '?' + createQueryString('page', item.toString()))
+                                    }}
+                                    isActive={item === page}
+                                >
+                                    {item}
+                                </PaginationLink>
+                            </PaginationItem>
+                        ))
+                    }
                     <PaginationItem >
                         <PaginationNext onClick={() => {
-                            console.log('isPlaceholderData', isPlaceholderData)
                             if (!isPlaceholderData) {
                                 setPage((old) => old + 1)
                                 router.push(pathname + '?' + createQueryString('page', (page + 1).toString()),)
