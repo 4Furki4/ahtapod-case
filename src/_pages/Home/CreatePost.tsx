@@ -46,6 +46,7 @@ export default function CreatePost({ pageNumber }: {
                     posts: [newPost.data, ...old.posts]
                 }
             })
+            form.reset()
         },
         onError: (error: AxiosError) => {
             if (error.response?.status === 401) {
