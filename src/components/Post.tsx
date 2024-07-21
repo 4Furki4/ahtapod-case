@@ -18,7 +18,7 @@ export default function Post({
     deleteModalTrigger?: React.ReactNode
 }) {
     return (
-        <Card key={post.id}>
+        <Card>
             <CardHeader>
                 <CardTitle>{post.title}</CardTitle>
             </CardHeader>
@@ -32,11 +32,10 @@ export default function Post({
                 </div>
                 <div className='flex items-center ml-auto gap-2'>
                     <Avatar className='ml-auto'>
-                        <AvatarImage src={post.user?.imageUrl ?? ''} alt={post.user?.firstName ?? ''} />
+                        <AvatarImage src={post.user?.imageUrl ?? ''} alt={post.user?.username ?? ''} />
                     </Avatar>
-                    <p>{post.user?.firstName}</p>
+                    <p>{post.user?.username}</p>
                 </div>
-
             </CardFooter>
         </Card>
     )

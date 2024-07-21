@@ -48,6 +48,7 @@ export default function Posts({ pageNumber, showDelete, showEdit }: { pageNumber
             <SkeletonCards />
         )
     }
+    console.log('posts', data.posts)
     return (
         <div className='max-w-6xl mx-auto flex flex-col gap-4'>
             {data?.posts.map((post) => (

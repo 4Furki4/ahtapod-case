@@ -40,7 +40,7 @@ export default function CreatePost({ pageNumber }: {
             queryClient.setQueryData(['posts', pageNumber], (old: any) => {
                 return {
                     ...old,
-                    posts: [newPost.data, ...old.posts]
+                    posts: [newPost, ...old.posts]
                 }
             })
             form.reset()
