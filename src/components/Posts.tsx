@@ -51,7 +51,7 @@ export default function Posts({ pageNumber, showDelete, showEdit }: { pageNumber
     return (
         <div className='max-w-6xl mx-auto flex flex-col gap-4'>
             {data?.posts.map((post) => (
-                <Post key={post.id} post={post} editModalTrigger={showEdit && <EditModal post={post} />} deleteModalTrigger={showDelete && <DeleteModal page={page} postId={post.id} />} />
+                <Post key={post.id} post={post} editModalTrigger={showEdit && <EditModal pageNumber={page} post={post} />} deleteModalTrigger={showDelete && <DeleteModal page={page} postId={post.id} />} />
             ))}
             <Pagination lastPage={data.totalPages} currentPage={page}>
                 <PaginationContent>

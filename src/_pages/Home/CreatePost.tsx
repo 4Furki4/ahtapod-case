@@ -41,7 +41,6 @@ export default function CreatePost({ pageNumber }: {
         onSuccess: async (newPost) => {
             toast.success('Post created successfully')
             queryClient.setQueryData(['posts', pageNumber], (old: any) => {
-                console.log('old', old)
                 return {
                     ...old,
                     posts: [newPost.data, ...old.posts]

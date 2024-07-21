@@ -14,3 +14,11 @@ export async function deletePost(postId: string, token: string | null) {
         }
     })).data
 }
+
+export async function editPost(postId: string, editedPost: any, token: string | null) {
+    return (await api.put(`/api/posts/${postId}`, editedPost, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })).data
+}
