@@ -27,3 +27,7 @@ export async function editPost(postId: string, editedPost: any, token: string | 
         }
     })).data
 }
+
+export async function getPostCount() {
+    return (await api.get('/api/posts/count')).data
+}

@@ -12,11 +12,11 @@ import {
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { deletePost } from '@/lib/api'
 import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
 import { AxiosError } from 'axios'
 import { useAuth } from '@clerk/nextjs';
+import { deletePost } from '@/lib/api/post'
 export default function DeleteModal({
     postId,
     page
@@ -40,6 +40,9 @@ export default function DeleteModal({
                     ...old,
                     posts: old.posts.filter((post: any) => post.id !== postId)
                 }
+            })
+            queryClient.invalidateQueries({
+                queryKey: ['postCount']
             })
         },
         onError: (error: AxiosError) => {
