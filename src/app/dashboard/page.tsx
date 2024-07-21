@@ -1,7 +1,10 @@
+import Dashboard from '@/_pages/Dashboard/Dashboard'
 import React from 'react'
 
-export default function page() {
+export default function DashboardPage() {
     return (
-        <div>page</div>
+        <main className='p-4'>
+            <Dashboard />
+        </main>
     )
 }

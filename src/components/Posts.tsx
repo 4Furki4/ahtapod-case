@@ -1,15 +1,7 @@
 'use client'
 import { getPosts } from '@/lib/api'
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
-import React, { useCallback } from 'react'
-import {
-    Card,
-    CardContent,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card"
-import { Avatar, AvatarImage } from '@/components/ui/avatar'
+import React, { ReactNode, useCallback } from 'react'
 import {
     Pagination,
     PaginationContent,
@@ -20,7 +12,10 @@ import {
 } from "@/components/ui/pagination"
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import SkeletonCards from './SkeletonCards'
-export default function Posts({ pageNumber }: { pageNumber: number }) {
+import Post from './Post'
+import DeleteModal from '@/_pages/Dashboard/DeleteModal'
+import EditModal from '@/_pages/Dashboard/EditModal'
+export default function Posts({ pageNumber, showDelete, showEdit }: { pageNumber: number, showDelete?: boolean, showEdit?: boolean }) {
     const [page, setPage] = React.useState(pageNumber)
     const limit = 10
     const router = useRouter()
@@ -54,25 +49,11 @@ export default function Posts({ pageNumber }: { pageNumber: number }) {
             <SkeletonCards />
         )
     }
+    console.log('data', data)
     return (
         <div className='max-w-6xl mx-auto flex flex-col gap-4'>
             {data?.posts.map((post) => (
-                <Card key={post.id}>
-                    <CardHeader>
-                        <CardTitle>{post.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent className=''>
-                        <pre className='text-wrap'>{post.content}</pre>
-                    </CardContent>
-                    <CardFooter>
-                        <div className='flex items-center ml-auto gap-2'>
-                            <Avatar className='ml-auto'>
-                                <AvatarImage src={post.user?.imageUrl ?? ''} alt={post.user?.firstName ?? ''} />
-                            </Avatar>
-                            <p>{post.user?.firstName}</p>
-                        </div>
-                    </CardFooter>
-                </Card>
+                <Post key={post.id} post={post} editModalTrigger={showEdit && <EditModal post={post} />} deleteModalTrigger={showDelete && <DeleteModal page={page} postId={post.id} />} />
             ))}
             <Pagination lastPage={data.totalPages} currentPage={page}>
                 <PaginationContent>

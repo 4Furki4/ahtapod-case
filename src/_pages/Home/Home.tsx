@@ -2,7 +2,7 @@ import React from 'react'
 import CreatePost from './CreatePost'
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'
 import { getPosts } from '@/lib/api'
-import Posts from './Posts'
+import Posts from '../../components/Posts'
 
 export default async function Home({
   searchParams
