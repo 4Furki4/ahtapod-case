@@ -25,7 +25,6 @@ export default function Posts({ pageNumber, showDelete, showEdit }: { pageNumber
         (name: string, value: string) => {
             const params = new URLSearchParams(searchParams.toString())
             params.set(name, value)
-
             return params.toString()
         },
         [searchParams]
@@ -49,7 +48,6 @@ export default function Posts({ pageNumber, showDelete, showEdit }: { pageNumber
             <SkeletonCards />
         )
     }
-    console.log('data', data)
     return (
         <div className='max-w-6xl mx-auto flex flex-col gap-4'>
             {data?.posts.map((post) => (

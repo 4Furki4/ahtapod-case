@@ -4,9 +4,11 @@ import { Button } from './ui/button'
 import { UserButton } from '@clerk/nextjs'
 
 export default function Navbar({
-    isSignedIn
+    isSignedIn,
+    isManager
 }: {
-    isSignedIn: boolean
+    isSignedIn: boolean,
+    isManager?: boolean
 }) {
     return (
         <header className='sticky top-0 z-50 w-full border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b-2 p-2'>
@@ -19,7 +21,7 @@ export default function Navbar({
                             </Button>
                         </Link>
                     </li>
-                    {isSignedIn ? (
+                    {isManager ? (
                         <li className='ml-auto'>
                             <Link href={'/dashboard'}>
                                 <Button variant={'link'}>

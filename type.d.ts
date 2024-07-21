@@ -19,3 +19,4 @@ type GetPostsResponse = {
     totalPosts: number
     totalPages: number
 }
+

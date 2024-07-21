@@ -8,6 +8,8 @@ import Navbar from "@/components/Navbar";
 import clsx from "clsx";
 import { auth } from "@clerk/nextjs/server";
 import { Toaster } from "@/components/ui/sonner";
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { SyncActiveOrganization } from "@/components/SyncActiveOrganizations";
 
 export const metadata: Metadata = {
   title: {
@@ -24,10 +26,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { userId }: { userId: string | null } = auth();
+  const { userId, sessionClaims } = auth();
   const isSignedIn = !!userId;
+  const isManager = sessionClaims?.org_role === "org:manager";
   return (
     <ClerkProvider>
+      <SyncActiveOrganization membership={sessionClaims?.membership} />
       <html suppressHydrationWarning lang="en">
         <body className={clsx(inter.className, "min-h-screen bg-background")}>
           <ReactQueryProvider>
@@ -38,8 +42,9 @@ export default function RootLayout({
               disableTransitionOnChange
             >
               <div className="relative flex min-h-screen flex-col bg-background">
-                <Navbar isSignedIn={isSignedIn} />
+                <Navbar isSignedIn={isSignedIn} isManager={isManager} />
                 {children}
+                <ReactQueryDevtools initialIsOpen={false} />
                 <Toaster richColors />
               </div>
             </ThemeProvider>
