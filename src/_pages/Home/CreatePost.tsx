@@ -19,7 +19,8 @@ import { toast } from 'sonner';
 import { useAuth } from '@clerk/nextjs';
 import { AxiosError } from 'axios';
 import { Loader2 } from 'lucide-react';
-import { api } from '@/lib/api';
+import { createPost } from '@/lib/api/post';
+
 
 export default function CreatePost({ pageNumber }: {
     pageNumber: number
@@ -30,13 +31,9 @@ export default function CreatePost({ pageNumber }: {
         resolver: zodResolver(AddPostSchema)
     })
     const postMutation = useMutation({
-        mutationFn: async (newPost) => {
+        mutationFn: async (newPost: Post) => {
             const token = await getToken()
-            return api.post('http://localhost:3001/api/posts', newPost, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
+            return createPost(newPost, token)
         },
         onSuccess: async (newPost) => {
             toast.success('Post created successfully')

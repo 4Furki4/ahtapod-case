@@ -1,5 +1,4 @@
 'use client'
-import { getPosts } from '@/lib/api'
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
 import React, { ReactNode, useCallback } from 'react'
 import {
@@ -15,6 +14,7 @@ import SkeletonCards from './SkeletonCards'
 import Post from './Post'
 import DeleteModal from '@/_pages/Dashboard/DeleteModal'
 import EditModal from '@/_pages/Dashboard/EditModal'
+import { getPosts } from '@/lib/api/post'
 export default function Posts({ pageNumber, showDelete, showEdit }: { pageNumber: number, showDelete?: boolean, showEdit?: boolean }) {
     const [page, setPage] = React.useState(pageNumber)
     const limit = 10

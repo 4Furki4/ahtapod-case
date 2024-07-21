@@ -1,10 +1,15 @@
-import axios from "axios";
-export const api = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001',
-});
+import { api } from "../utils"
 
 export async function getPosts(page: number = 1, limit: number = 10) {
     return (await api.get(`/api/posts?page=${page}&limit=${limit}`)).data as GetPostsResponse
+}
+
+export async function createPost(newPost: Post, token: string | null) {
+    return (await api.post('http://localhost:3001/api/posts', newPost, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })).data
 }
 
 export async function deletePost(postId: string, token: string | null) {

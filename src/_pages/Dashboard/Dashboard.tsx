@@ -1,7 +1,7 @@
-import { getPosts } from '@/lib/api'
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'
 import React from 'react'
 import Posts from '../../components/Posts'
+import { getPosts } from '@/lib/api/post'
 
 export default async function Dashboard({
     searchParams

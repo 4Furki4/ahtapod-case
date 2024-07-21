@@ -21,13 +21,13 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Loader2 } from 'lucide-react'
-import { editPost } from '@/lib/api'
 import { z } from 'zod'
 import { AddPostSchema } from '@/schemas/AddPostSchema'
 import { toast } from 'sonner'
 import { AxiosError } from 'axios'
 import { useAuth } from '@clerk/nextjs'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { editPost } from '@/lib/api/post'
 
 export default function EditModal({
     post,
