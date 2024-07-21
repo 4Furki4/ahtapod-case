@@ -18,8 +18,8 @@ export default function Post({
     deleteModalTrigger?: React.ReactNode
 }) {
     return (
-        <Card>
-            <CardHeader>
+        <Card className='break-words hyphens-auto'>
+            <CardHeader >
                 <CardTitle>{post.title}</CardTitle>
             </CardHeader>
             <CardContent className=''>
