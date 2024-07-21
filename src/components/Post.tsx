@@ -25,16 +25,30 @@ export default function Post({
             <CardContent className=''>
                 <pre className='text-wrap'>{post.content}</pre>
             </CardContent>
-            <CardFooter>
-                <div className='flex gap-2'>
+            <CardFooter className='flex flex-col items-start'>
+                <div className='flex gap-2 mb-4'>
                     {editModalTrigger}
                     {deleteModalTrigger}
                 </div>
-                <div className='flex items-center ml-auto gap-2'>
-                    <Avatar className='ml-auto'>
-                        <AvatarImage src={post.user?.imageUrl ?? ''} alt={post.user?.username ?? ''} />
-                    </Avatar>
-                    <p>{post.user?.username}</p>
+                <div className='w-full flex flex-col sm:flex-row sm:items-center gap-2'>
+                    <div className='flex flex-col'>
+                        <span>
+                            Post Created at: {new Date(post.createdAt).toLocaleString()}
+                        </span>
+                        {
+                            post.updatedAt === post.createdAt ? null : (
+                                <span>
+                                    Post Updated at: {new Date(post.updatedAt).toLocaleString()}
+                                </span>
+                            )
+                        }
+                    </div>
+                    <div className='sm:ml-auto flex items-center gap-2'>
+                        <Avatar>
+                            <AvatarImage src={post.user?.imageUrl ?? ''} alt={post.user?.username ?? ''} />
+                        </Avatar>
+                        <p>{post.user?.username}</p>
+                    </div>
                 </div>
             </CardFooter>
         </Card>
