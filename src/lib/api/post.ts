@@ -5,7 +5,7 @@ export async function getPosts(page: number = 1, limit: number = 10) {
 }
 
 export async function createPost(newPost: Post, token: string | null) {
-    return (await api.post('http://localhost:3001/api/posts', newPost, {
+    return (await api.post('/api/posts', newPost, {
         headers: {
             Authorization: `Bearer ${token}`
         }
