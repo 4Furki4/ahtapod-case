@@ -7,6 +7,14 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
+/**
+ * 
+ * @param post The post to display
+ * @param editModalTrigger The trigger to open the edit modal, if not provided the edit modal will not be shown
+ * @param deleteModalTrigger The trigger to open the delete modal, if not provided the delete modal will not be shown
+ * @returns The post with the user and the edit and delete modals if needed
+ */
+
 
 export default function Post({
     post,

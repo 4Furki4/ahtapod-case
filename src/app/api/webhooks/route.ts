@@ -4,6 +4,12 @@ import { WebhookEvent } from '@clerk/nextjs/server'
 import { createUser } from '@/lib/users'
 import { User } from '@prisma/client'
 
+/**
+ * @brief This function is used to handle the POST request from Clerk Webhooks for user creation in the database
+ * @param req The request object
+ * @returns A response object with a status code
+ */
+
 export async function POST(req: Request) {
 
     // You can find this in the Clerk Dashboard -> Webhooks -> choose the endpoint

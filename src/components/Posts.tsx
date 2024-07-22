@@ -15,12 +15,20 @@ import Post from './Post'
 import DeleteModal from '@/_pages/Dashboard/DeleteModal'
 import EditModal from '@/_pages/Dashboard/EditModal'
 import { getPosts } from '@/lib/api/post'
+/**
+ * 
+ * @param pageNumber The page number to send to the server to get which page to fetch
+ * @param showDelete A boolean to show the delete modal
+ * @param showEdit A boolean to show the edit modal
+ * @returns The posts with the delete and edit modals if needed
+ */
 export default function Posts({ pageNumber, showDelete, showEdit }: { pageNumber: number, showDelete?: boolean, showEdit?: boolean }) {
     const [page, setPage] = React.useState(pageNumber)
     const limit = 10
     const router = useRouter()
     const pathname = usePathname()
     const searchParams = useSearchParams()
+    // Create a query string with the page number, taken from the next docs
     const createQueryString = useCallback(
         (name: string, value: string) => {
             const params = new URLSearchParams(searchParams.toString())
@@ -48,7 +56,6 @@ export default function Posts({ pageNumber, showDelete, showEdit }: { pageNumber
             <SkeletonCards />
         )
     }
-    console.log('posts', data.posts)
     return (
         <div className='max-w-6xl mx-auto flex flex-col gap-4'>
             {data?.posts.map((post) => (
