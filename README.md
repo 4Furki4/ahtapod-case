@@ -34,10 +34,12 @@ In this project, I have created a simple web application that allows users to cr
 DATABASE_URI=
 NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
 NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
-// You can get the following keys from the Clerk dashboard
+# You can get the following keys from the Clerk dashboard
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
 CLERK_SECRET_KEY=
 WEBHOOK_SECRET=
+# You'll need this in production
+NEXT_PUBLIC_API_URL=
 ````
 ### Setting Webhook Up for Local Development
 
