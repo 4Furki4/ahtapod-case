@@ -1,6 +1,13 @@
 import prisma from '@/lib/prisma'
 import { User } from '@prisma/client'
 
+
+/**
+ *
+ * @brief This function is used to create a user in the database when a user signs up through the Clerk API
+ * @param data is the user data to be created
+ * @returns the user if created successfully or error if an error occurs
+ */
 export async function createUser(data: User) {
     try {
         const user = await prisma.user.create({ data })

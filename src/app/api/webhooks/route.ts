@@ -50,14 +50,13 @@ export async function POST(req: Request) {
     }
 
     // Do something with the payload
-    // For this guide, you simply log the payload to the console
     const { id } = evt.data;
     const eventType = evt.type;
     console.log(`Webhook with and ID of ${id} and type of ${eventType}`)
     console.log('Webhook body:', body)
 
     if (eventType === 'user.created') {
-        const { id, email_addresses, first_name, last_name, image_url } = evt.data
+        const { id, email_addresses, first_name, last_name, image_url, username } = evt.data
 
         if (!id || !email_addresses) {
             return new Response('Error occurred -- missing data', {
@@ -68,6 +67,7 @@ export async function POST(req: Request) {
         const user = {
             clerkUserId: id,
             email: email_addresses[0].email_address,
+            username,
             ...(first_name ? { firstName: first_name } : {}),
             ...(last_name ? { lastName: last_name } : {}),
             ...(image_url ? { imageUrl: image_url } : {})
