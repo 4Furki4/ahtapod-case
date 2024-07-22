@@ -47,7 +47,7 @@ export default function EditModal({
         resolver: zodResolver(AddPostSchema)
     })
     const editMutation = useMutation({
-        mutationFn: async (editedPost) => {
+        mutationFn: async (editedPost: Post) => {
             const token = await getToken()
             return editPost(post.id, editedPost, token)
         },

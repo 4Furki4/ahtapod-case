@@ -28,16 +28,21 @@ export default function CreatePost({ pageNumber }: {
     const { getToken } = useAuth()
     const queryClient = useQueryClient()
     const form = useForm<z.infer<typeof AddPostSchema>>({
-        resolver: zodResolver(AddPostSchema)
+        resolver: zodResolver(AddPostSchema),
+        defaultValues: {
+            title: '',
+            content: ''
+        }
     })
     const postMutation = useMutation({
         mutationFn: async (newPost: Post) => {
             const token = await getToken()
             return createPost(newPost, token)
         },
-        onSuccess: async (newPost) => {
+        onSuccess: async (newPost: Post) => {
             toast.success('Post created successfully')
-            queryClient.setQueryData(['posts', pageNumber], (old: any) => {
+            queryClient.setQueryData(['posts', pageNumber], (old: { posts: Post[], totalPages: number, totalPosts: number }) => {
+                console.log('old', old)
                 return {
                     ...old,
                     posts: [newPost, ...old.posts]
